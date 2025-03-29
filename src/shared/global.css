@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary-25: 243 248 255;
+    --primary-50: 230 241 254;
+    --primary-75: 217, 234, 253;
+    --primary-100: 204 227 252;
+    --primary-150: 179 213 251;
+    --primary-200: 153 198 249;
+    --primary-250: 128 184 248;
+    --primary-300: 102 170 246;
+    --primary-350: 77 156 245;
+    --primary-400: 51 141 243;
+    --primary-450: 26 127 242;
+    --primary-500: 0 113 240;
+    --primary-550: 0 102 216;
+    --primary-600: 0 90 192;
+    --primary-650: 0 79 168;
+    --primary-700: 0 68 144;
+    --primary-750: 0 57 120;
+    --primary-800: 0 45 96;
+    --primary-850: 0 34 72;
+    --primary-900: 0 23 48;
+
+    --danger-25: 255 246 246;
+    --danger-50: 255 236 236;
+    --danger-75: 255 226 226;
+    --danger-100: 255 216 216;
+    --danger-150: 255 197 197;
+    --danger-200: 255 177 177;
+    --danger-250: 255 158 158;
+    --danger-300: 255 139 139;
+    --danger-350: 255 120 120;
+    --danger-400: 255 100 100;
+    --danger-450: 255 81 81;
+    --danger-500: 255 61 61;
+    --danger-550: 242 58 58;
+    --danger-600: 204 49 49;
+    --danger-650: 191 46 46;
+    --danger-700: 153 37 37;
+    --danger-750: 140 34 34;
+    --danger-800: 102 24 24;
+    --danger-850: 89 21 21;
+    --danger-900: 51 12 12;
+
+    --warning-25: 254 249 243;
+    --warning-50: 253 243 231;
+    --warning-75: 253 237 219;
+    --warning-100: 252 231 207;
+    --warning-150: 251 219 183;
+    --warning-200: 250 206 159;
+    --warning-250: 251 206 140;
+    --warning-300: 255 206 102;
+    --warning-350: 255 198 77;
+    --warning-400: 255 190 51;
+    --warning-450: 255 182 26;
+    --warning-500: 255 174 0;
+    --warning-550: 242 165 0;
+    --warning-600: 204 139 0;
+    --warning-650: 191 130 0;
+    --warning-700: 153 104 0;
+    --warning-750: 140 95 0;
+    --warning-800: 102 70 0;
+    --warning-850: 89 61 0;
+    --warning-900: 51 35 0;
+
+    --success-25: 245 251 245;
+    --success-50: 234 247 234;
+    --success-75: 224 244 224;
+    --success-100: 213 240 213;
+    --success-150: 192 233 193;
+    --success-200: 171 226 172;
+    --success-250: 150 219 151;
+    --success-300: 128 211 130;
+    --success-350: 107 204 110;
+    --success-400: 86 196 89;
+    --success-450: 65 189 68;
+    --success-500: 44 182 47;
+    --success-550: 42 173 45;
+    --success-600: 35 145 38;
+    --success-650: 33 136 36;
+    --success-700: 26 109 28;
+    --success-750: 24 100 26;
+    --success-800: 18 73 19;
+    --success-850: 16 64 17;
+    --success-900: 9 36 9;
+
+    --info-25: 243 248 255;
+    --info-50: 230 241 254;
+    --info-75: 217, 234, 253;
+    --info-100: 204 227 252;
+    --info-150: 179 213 251;
+    --info-200: 153 198 249;
+    --info-250: 128 184 248;
+    --info-300: 102 170 246;
+    --info-350: 77 156 245;
+    --info-400: 51 141 243;
+    --info-450: 26 127 242;
+    --info-500: 0 113 240;
+    --info-550: 0 102 216;
+    --info-600: 0 90 192;
+    --info-650: 0 79 168;
+    --info-700: 0 68 144;
+    --info-750: 0 57 120;
+    --info-800: 0 45 96;
+    --info-850: 0 34 72;
+    --info-900: 0 23 48;
+
+    --background-primary: 238 240 243;
+    --background-secondary: 255 255 255;
+    --background-tertiary: 241 244 250;
+
+    --foreground-primary: 0 45 96;
+    --foreground-secondary: 89 118 151;
+    --foreground-tertiary: 140 160 183;
+
+    --accent-light: 219 226 239;
+    --accent-medium: 182 194 217;
+    --accent-dark: 55 84 113;
+
+    --border: 207 214 229;
+
+    --table-header: 207 214 229;
+}
+
+.break-word {
+    word-break: break-word;
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    html,
+    body {
+        @apply bg-background-primary text-foreground-primary;
+    }
+}

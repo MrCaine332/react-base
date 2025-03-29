@@ -1,0 +1,24 @@
+.selectable {
+  @apply w-full flex-col overflow-auto rounded-md outline-primary-500 outline-1;
+}
+
+.selectable-input {
+}
+
+.selectable-list {
+  @apply p-1;
+}
+
+.selectable-empty {
+}
+
+.selectable-group {
+}
+
+.selectable-group-heading {
+  @apply px-2 py-1.5 text-xs font-medium text-foreground-secondary;
+}
+
+.selectable-item {
+  @apply relative flex items-center h-8 px-2 outline-none rounded text-sm cursor-pointer select-none transition-colors duration-75 data-[selected=true]:bg-background-tertiary data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50;
+}

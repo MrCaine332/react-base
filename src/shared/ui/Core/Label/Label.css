@@ -1,0 +1,5 @@
+.label {
+    @apply text-sm text-foreground-primary;
+    @apply peer-disabled:opacity-50 peer-disabled:pointer-events-none;
+    @apply has-[:disabled]:text-foreground-primary/50 has-[:disabled]:pointer-events-none;
+}

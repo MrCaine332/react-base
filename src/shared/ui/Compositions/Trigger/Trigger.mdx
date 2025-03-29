@@ -1,0 +1,52 @@
+import { Canvas, Controls, Meta } from '@storybook/blocks'
+
+import * as TriggerStories from './Trigger.stories'
+
+<Meta of={TriggerStories} />
+
+# Button
+
+Displays a button or a component that looks like a button.
+
+## Description
+
+There are 5 prepared **_Button_** variants: **_'default'_**, **_'outlined'_**, **_'link'_**, **_'ghost'_**, **_'clean'_**, **_'trigger'_**.
+
+Depending on what button type you want, you need to pass variant as string to the **_'variant'_** attribute,
+ex. `<Button variant="outlined">...`. If no variant passed, **_'default'_** variant is displayed.
+
+Additionally, **_'plain'_** variant might be used. This variant does not have any styling and suitable for styling the button from the scratch.
+
+<Canvas of={TriggerStories.All} />
+
+### As Child
+
+**_asChild_** attribute allows to copy Button props to the first and only child. This allows to simplify styling of other triggers, links, etc.
+
+For example, we want to have a "Button-Link",
+that is going to look like link, but have a behaviour of Link component from 'react-router-dom'. We can easily achieve such a result by using **_'asChild'_** props:
+
+```
+<Button variant="outlined" asChild>
+    <Link to="/test" />
+</Button>
+```
+
+**_Note: Most of the Triggers also have 'asChild' prop. For example, PopoverTrigger, DropdownTrigger, DialogTrigger._**
+
+### Styling Warning
+
+Because of some global styling in the WebApp, styling absolutely any button with Tailwind CSS has problem regarding text size/weight.
+Tailwind CSS properties `text-sm text-lg ...` and `font-normal font-medium font-bold` are overwritten by global styling with `!important`
+
+To bypass this problem, simply add `!` before Tailwind CSS class, ex: `className="bg-primary !text-sm !font-normal text-white"`
+
+### Props
+
+**_Button_** accept all default **_HTML Button Element_** props as well as 2 additional attributes: **_'variant'_** and **_'asChild'_**
+
+**_'variant'_** attribute is responsible for appearance of the Button
+
+**_'asChild'_** attribute allows to render Button as part of the child component passed into Button.
+
+### Playground

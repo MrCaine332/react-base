@@ -1,0 +1,262 @@
+.field-label {
+    @apply absolute left-0 top-[-1px] z-0;
+    @apply text-sm font-normal;
+    @apply h-[0px] flex items-center;
+    @apply ml-1.5 px-1.5;
+    @apply text-sm text-foreground-secondary;
+    background-color: inherit;
+
+    &:before {
+        @apply absolute left-0 top-0 z-[-1];
+        @apply w-full h-[3px];
+        content: "";
+        transition: inherit;
+        background-color: inherit;
+    }
+}
+
+.field {
+    @apply flex items-center h-9;
+
+    /* "AddonBox" provides --addon-before-width and --addon-after-width values
+        that are taken from "AddonBefore" and "AddonAfter" components with useDimensionCapture hook */
+    --padding-left: 0.5rem;
+    --padding-right: 0.5rem;
+
+    &:has(.addon-before) {
+        --padding-left: var(--addon-before-width, 0.5rem);
+    }
+
+    &:has(.addon-after) {
+        --padding-right: var(--addon-after-width, 0.5rem);
+    }
+
+    /* Based on the values above we can automatically add padding to the child
+        ("Field" component in general should always accept only one element through children) */
+
+    & > :not(.addon-before, .addon-after, .field-label) {
+        padding-left: var(--padding-left);
+        padding-right: var(--padding-right);
+    }
+
+    /* Only if variant is not "unstyled", apply styles for transition and disabled state */
+
+    &:not(.field-unstyled) {
+        @apply transition-all duration-150;
+        @apply border rounded-lg;
+
+        &.field-disabled {
+            @apply opacity-50 cursor-not-allowed;
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Field simple */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.field-simple {
+        @apply border-none rounded-none;
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Field outlined */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.field-outlined {
+        --field-border-color: rgb(var(--border));
+        --field-hover-border-color: rgb(var(--primary-300));
+        --field-active-border-color: rgb(var(--primary-500));
+        --field-ring-color: rgb(var(--primary-200));
+
+        @apply border-[var(--field-border-color)] bg-background-secondary;
+
+        &:hover {
+            @apply border-[var(--field-hover-border-color)];
+        }
+
+        &:focus-within:not(:has(.addon-before:focus-within, .addon-after:focus-within)),
+        &.field-active {
+            @apply border-[var(--field-active-border-color)] ring-2 ring-inset ring-[var(--field-ring-color)];
+
+            &:hover {
+                @apply border-[var(--field-active-border-color)];
+            }
+        }
+
+        &.status-error {
+            --field-border-color: rgb(var(--danger-500));
+            --field-hover-border-color: rgb(var(--danger-300));
+            --field-active-border-color: rgba(var(--danger-500));
+            --field-ring-color: rgb(var(--danger-200));
+        }
+
+        &.status-warning {
+            --field-border-color: rgb(var(--warning-500));
+            --field-hover-border-color: rgb(var(--warning-300));
+            --field-active-border-color: rgba(var(--warning-500));
+            --field-ring-color: rgb(var(--warning-200));
+        }
+
+        &.status-success {
+            --field-border-color: rgb(var(--success-500));
+            --field-hover-border-color: rgb(var(--success-300));
+            --field-active-border-color: rgba(var(--success-500));
+            --field-ring-color: rgb(var(--success-200));
+        }
+
+        &.status-info {
+            --field-border-color: rgb(var(--primary-500));
+            --field-hover-border-color: rgb(var(--primary-300));
+            --field-active-border-color: rgba(var(--primary-500));
+            --field-ring-color: rgb(var(--primary-200));
+        }
+
+        &.field-disabled {
+            --field-hover-border-color: var(--field-border-color);
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Field filled */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.field-filled {
+        @apply border-[var(--field-background-color)] bg-[var(--field-background-color)];
+
+        &:hover {
+            @apply border-[var(--field-hover-background-color)] bg-[var(--field-hover-background-color)];
+        }
+
+        &:focus-within:not(:has(.addon-before:focus-within, .addon-after:focus-within)),
+        &.field-active {
+            @apply ring-2 ring-[var(--field-ring-color)];
+
+            &:hover {
+                @apply border-[var(--field-background-color)] bg-[var(--field-background-color)];
+            }
+        }
+
+        &.color-default {
+            --field-background-color: rgb(var(--background-tertiary));
+            --field-hover-background-color: rgba(var(--background-tertiary) / 70%);
+            --field-active-background-color: rgb(var(--background-tertiary));
+            --field-ring-color: rgba(var(--primary-350));
+        }
+
+        &.color-danger {
+            --field-background-color: rgb(var(--danger-500));
+            --field-hover-background-color: rgb(var(--danger-600));
+            --field-active-background-color: rgb(var(--danger-500));
+            --field-ring-color: rgba(var(--danger-200));
+            color: #fff;
+        }
+
+        &.color-warning {
+            --field-background-color: rgb(var(--warning-400));
+            --field-hover-background-color: rgb(var(--warning-500));
+            --field-active-background-color: rgb(var(--warning-400));
+            --field-ring-color: rgba(var(--warning-200));
+            color: #fff;
+        }
+
+        &.color-success {
+            --field-background-color: rgb(var(--success-500));
+            --field-hover-background-color: rgb(var(--success-600));
+            --field-active-background-color: rgb(var(--success-500));
+            --field-ring-color: rgba(var(--success-200));
+            color: #fff;
+        }
+
+        &.color-info {
+            --field-background-color: rgb(var(--primary-500));
+            --field-hover-background-color: rgb(var(--primary-600));
+            --field-active-background-color: rgb(var(--primary-500));
+            --field-ring-color: rgba(var(--primary-200));
+            color: #fff;
+        }
+
+        &.field-disabled {
+            --field-hover-background-color: var(--field-background-color);
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Field filled-outlined */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.field-filled-outlined {
+        @apply border-[var(--field-border-color)] bg-[var(--field-background-color)];
+
+        &:hover {
+            @apply border-[var(--field-hover-border-color)] bg-[var(--field-hover-background-color)];
+        }
+
+        &:focus-within:not(:has(.addon-before:focus-within, .addon-after:focus-within)),
+        &.field-active {
+            @apply border-[var(--field-active-border-color)] bg-[var(--field-active-background-color)] ring-2 ring-inset ring-[var(--field-ring-color)];
+
+            &:hover {
+                @apply border-[var(--field-active-border-color)] bg-[var(--field-active-background-color)];
+            }
+        }
+
+        &.color-default {
+            --field-background-color: rgb(var(--background-tertiary));
+            --field-hover-background-color: rgba(var(--background-tertiary) / 70%);
+            --field-active-background-color: rgb(var(--background-tertiary));
+            --field-border-color: rgb(var(--border));
+            --field-hover-border-color: rgb(var(--primary-300));
+            --field-active-border-color: rgb(var(--primary-500));
+            --field-ring-color: rgba(var(--primary-200));
+        }
+
+        &.color-danger {
+            --field-background-color: rgb(var(--danger-100));
+            --field-hover-background-color: rgba(var(--danger-150));
+            --field-active-background-color: rgb(var(--danger-150));
+            --field-border-color: rgb(var(--danger-500));
+            --field-hover-border-color: rgba(var(--danger-500));
+            --field-active-border-color: rgba(var(--danger-500));
+            --field-ring-color: rgba(var(--danger-200));
+            color: rgb(var(--danger-800));
+        }
+
+        &.color-warning {
+            --field-background-color: rgb(var(--warning-100));
+            --field-hover-background-color: rgba(var(--warning-150));
+            --field-active-background-color: rgb(var(--warning-150));
+            --field-border-color: rgb(var(--warning-500));
+            --field-hover-border-color: rgba(var(--warning-500));
+            --field-active-border-color: rgba(var(--warning-500));
+            --field-ring-color: rgba(var(--warning-200));
+            color: rgb(var(--warning-800));
+        }
+
+        &.color-success {
+            --field-background-color: rgb(var(--success-100));
+            --field-hover-background-color: rgba(var(--success-150));
+            --field-active-background-color: rgb(var(--success-150));
+            --field-border-color: rgb(var(--success-500));
+            --field-hover-border-color: rgba(var(--success-500));
+            --field-active-border-color: rgba(var(--success-500));
+            --field-ring-color: rgba(var(--success-200));
+            color: rgb(var(--success-800));
+        }
+
+        &.color-info {
+            --field-background-color: rgb(var(--primary-100));
+            --field-hover-background-color: rgba(var(--primary-150));
+            --field-active-background-color: rgb(var(--primary-150));
+            --field-border-color: rgb(var(--primary-500));
+            --field-hover-border-color: rgba(var(--primary-500));
+            --field-active-border-color: rgba(var(--primary-500));
+            --field-ring-color: rgba(var(--primary-200));
+            color: rgb(var(--primary-800));
+        }
+
+        &.field-disabled {
+            --field-hover-border-color: var(--field-border-color);
+            --field-hover-background-color: var(--field-background-color);
+        }
+    }
+}

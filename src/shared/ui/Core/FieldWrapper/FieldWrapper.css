@@ -1,0 +1,18 @@
+.field-wrapper {
+    @apply flex flex-col gap-0.5;
+
+    &.field-disabled {
+        .field-message,
+        .field-description {
+            @apply opacity-50;
+        }
+    }
+}
+
+.field-message {
+    @apply ml-1.5;
+}
+
+.field-description {
+    @apply ml-1.5;
+}

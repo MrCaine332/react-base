@@ -1,0 +1,44 @@
+import { Canvas, Meta } from '@storybook/blocks'
+
+import * as SeparatorStories from './Separator.stories'
+
+<Meta of={SeparatorStories} />
+
+# Separator
+
+Visually or semantically separates content.
+
+Radix UI Separator documentation - [https://www.radix-ui.com/primitives/docs/components/separator](https://www.radix-ui.com/primitives/docs/components/separator)
+
+shadcn/ui Separator documentation - [https://ui.shadcn.com/docs/components/separator](https://ui.shadcn.com/docs/components/separator)
+
+<Canvas of={SeparatorStories.Demo} />
+
+## Props
+
+Radix UI Separator API reference - [https://www.radix-ui.com/primitives/docs/components/separator#api-reference](https://www.radix-ui.com/primitives/docs/components/separator#api-reference)
+
+**_Accepts all props of HTML Div Element and props below:_**
+
+<div>
+    <table>
+        <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Comment</th>
+        </tr>
+        <tr>
+            <td>orientation</td>
+            <td>"horizontal" | "vertical" (default ***"horizontal"***)</td>
+            <td className="space-y-2 text-sm font-normal">The orientation of the separator.</td>
+        </tr>
+        <tr>
+            <td>decorative</td>
+            <td>boolean | undefined</td>
+            <td className="space-y-2 text-sm font-normal">
+                When true, signifies that it is purely visual, carries no semantic meaning, and ensures it is not
+                present in the accessibility tree.
+            </td>
+        </tr>
+    </table>
+</div>

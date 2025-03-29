@@ -1,0 +1,147 @@
+import { Canvas, Meta } from '@storybook/blocks'
+
+import * as PopoverStories from './Popover.stories'
+
+<Meta of={PopoverStories} />
+
+# Popover
+
+Displays rich content in a portal, triggered by a button.
+
+Radix UI Popover documentation - [https://www.radix-ui.com/primitives/docs/components/popover](https://www.radix-ui.com/primitives/docs/components/popover)
+
+shadcn/ui Popover documentation - [https://ui.shadcn.com/docs/components/popover](https://ui.shadcn.com/docs/components/popover)
+
+### Warning:
+
+**_Popover_** need to be used when you have unstructured or unpredictable Dropdown Content, since the navigation inside
+the **_PopoverContent_** is happening with Tab key.
+
+**_Popover_** is not really suitable if you need structured, vertical Dropdown Menu with Sub Menus. Use **_DropdownMenu Primitives_** for this case.
+However, if you need unstructured Dropdown with navigation through Tab, use Popover.
+
+## Composed Component
+
+**_Popover_** is Composed Component - it has 4 different components - **_Primitives_**, which need to be combined to create fully functional **_Popover_**.
+
+-   **_PopoverRoot_** - The first component that contains **_PopoverTrigger_** and **_PopoverContent_**.
+-   **_PopoverTriggerWrapper_** - Wrapper for trigger. Can be used to attach  **_PopoverTriggerLabel_** and
+    **_PopoverTriggerIcon_** to the trigger without passing them as children to the **_PopoverTrigger_** itself
+    which can cause problems (ex. **_Button-Icon_** should not be passed into the **_PopoverTrigger_**. Hence, better to use **_PopoverTriggerWrapper_**
+    and pass both **_PopoverTrigger_** and **_PopoverTriggerIcon_** as children of **_PopoverTriggerWrapper_**).
+-   **_PopoverTrigger_** - First child of **_PopoverRoot_**. Serves as trigger for opening/closing **_PopoverContent_**
+    -   **_PopoverTriggerLabel_** - Simple trigger label similar to **_Select_**, **_Popover_** and **_Input_**
+    -   **_PopoverTriggerIcon_** - Absolutely positioned element which can be used for different purposes,
+    usually trigger icon, like **_Arrow_** or **_Chevron_**, or additional **_Overlay Button_**.
+    Should be placed inside **_PopoverTriggerWrapper_**.
+-   **_PopoverContent_** - Second child of **_PopoverRoot_**. May content whatever you will pass there. Navigation inside is happening with Tab key
+    -   **_PopoverArrow_** - Simple primitive that creates small arrow on top/bottom of the menu. Visually attaches the menu to specific trigger.
+    Can be located anywhere in **_PopoverContent_**, but preferably should be first/last child.
+
+Each Component can be styled and re-styled and has its own set of props.
+
+Click **_'Show Code'_** to see how **_Composed Popover Component_** looks like.
+
+<Canvas of={PopoverStories.Demo} />
+
+## Constrain the content size
+
+You may want to constrain the width of the content so that it matches the trigger width.
+You may also want to constrain its height to not exceed the viewport.
+
+There are several exposed CSS custom properties such as --radix-popover-trigger-width and
+--radix-popover-content-available-height to support this. Use them to constrain the content dimensions.
+
+```
+<PopoverRoot>
+    <PopoverTriggerWrapper>
+        ...
+    </PopoverTriggerWrapper>
+    <PopoverContent className="w-[var(--radix-popover-trigger-width)]">
+        ...
+    </PopoverContent>
+</PopoverRoot>
+```
+
+<Canvas of={PopoverStories.ConstrainSize} />
+
+## Props
+
+Radix UI Popover API reference - [https://www.radix-ui.com/primitives/docs/components/popover#api-reference](https://www.radix-ui.com/primitives/docs/components/popover#api-reference)
+
+### PopoverRoot
+
+**_Accepts all props of HTML Div Element and props below:_**
+
+<div>
+    <table>
+        <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Comment</th>
+        </tr>
+        <tr>
+            <td>defaultOpen</td>
+            <td>boolean | undefined</td>
+            <td className="space-y-2 text-sm font-normal">
+                The open state of the popover when it is initially rendered. Use when you do not need to control its
+                open state.
+            </td>
+        </tr>
+        <tr>
+            <td>open</td>
+            <td>boolean | undefined</td>
+            <td className="space-y-2 text-sm font-normal">
+                The controlled open state of the popover. Must be used in conjunction with onOpenChange.
+            </td>
+        </tr>
+        <tr>
+            <td>onOpenChange</td>
+            <td>((open: boolean) => void) | undefined</td>
+            <td className="space-y-2 text-sm font-normal">
+                Event handler called when the open state of the popover changes.
+            </td>
+        </tr>
+        <tr>
+            <td>modal</td>
+            <td>boolean (default ***false***)</td>
+            <td className="space-y-2 text-sm font-normal">
+                The modality of the popover. When set to true, interaction with outside elements will be disabled and
+                only popover content will be visible to screen readers.
+            </td>
+        </tr>
+    </table>
+</div>
+
+### PopoverTriggerWrapper
+
+**_Accepts all props of HTML Div Element._**
+
+### PopoverTrigger
+
+**_Accepts all props of HTML Button Element and 'asChild' prop._**
+
+**_asChild_** attribute allows to copy PopoverTrigger props to the first and only child.
+
+For example, we want to have a custom styled ***PopoverTrigger***,
+that is going to work like trigger, but have a look of one of predefined buttons.
+We can easily achieve such a result by using **_'asChild'_** props:
+
+```
+<PopoverTrigger asChild>
+    <Button>Custom Button</Button>
+</PopoverTrigger>
+```
+
+### PopoverTriggerLabel
+
+**_Accepts all props of HTML Label Element._**
+
+### PopoverTriggerIcon
+
+**_Accepts all props of HTML Div Element._**
+
+### PopoverContent
+
+**_Accepts all props of HTML Div Element and props below:_**\
+[https://www.radix-ui.com/primitives/docs/components/popover#content](https://www.radix-ui.com/primitives/docs/components/popover#content)

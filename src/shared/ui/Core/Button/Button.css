@@ -1,0 +1,203 @@
+/*-----------------------------------------------------------------------------------------------*/
+/* Button base colors */
+/*-----------------------------------------------------------------------------------------------*/
+.button {
+    @apply flex items-center justify-center gap-2 h-9;
+
+    /* Only if variant is not "unstyled", apply basic styles */
+
+    &:not(.button-unstyled) {
+        @apply px-3 rounded-lg overflow-visible;
+        @apply text-base text-nowrap;
+        @apply pointer-events-auto transition-all duration-75;
+        @apply outline-none;
+        @apply disabled:opacity-50;
+        @apply focus-visible:ring-2;
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Button filled */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.button-filled {
+        &.button-default {
+            @apply bg-primary-500 disabled:bg-primary-500 text-white hover:bg-primary-600 focus-visible:bg-primary-600 active:bg-primary-700 focus-visible:ring-primary-200;
+        }
+
+        &.button-primary {
+            @apply bg-primary-500 disabled:bg-primary-500 text-white hover:bg-primary-600 focus-visible:bg-primary-600 active:bg-primary-700 focus-visible:ring-primary-200;
+        }
+
+        &.button-danger {
+            @apply bg-danger-500 disabled:bg-danger-500 text-white hover:bg-danger-600 focus-visible:bg-danger-600 active:bg-danger-700 focus-visible:ring-danger-200;
+        }
+
+        &.button-warning {
+            @apply bg-warning-400 disabled:bg-warning-400 text-white hover:bg-warning-500 focus-visible:bg-warning-500 active:bg-warning-600 focus-visible:ring-warning-200;
+        }
+
+        &.button-success {
+            @apply bg-success-500 disabled:bg-success-500 text-white hover:bg-success-600 focus-visible:bg-success-600 active:bg-success-700 focus-visible:ring-success-200;
+        }
+
+        &.button-neutral {
+            @apply bg-foreground-primary disabled:bg-foreground-primary text-white hover:bg-foreground-primary/90 focus-visible:bg-foreground-primary/90 active:bg-foreground-primary/80 focus-visible:ring-foreground-primary/40;
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Button outlined */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.button-outlined {
+        @apply border;
+
+        &.button-default {
+            @apply border-primary-500 bg-transparent disabled:bg-transparent text-primary-500 hover:bg-primary-50 focus-visible:bg-primary-50 active:bg-primary-100 focus-visible:ring-primary-200;
+        }
+
+        &.button-primary {
+            @apply border-primary-500 bg-transparent disabled:bg-transparent text-primary-500 hover:bg-primary-50 focus-visible:bg-primary-50 active:bg-primary-100 focus-visible:ring-primary-200;
+        }
+
+        &.button-danger {
+            @apply border-danger-500 bg-transparent disabled:bg-transparent text-danger-500 hover:bg-danger-50 focus-visible:bg-danger-50 active:bg-danger-100 focus-visible:ring-danger-200;
+        }
+
+        &.button-warning {
+            @apply border-warning-500 bg-transparent disabled:bg-transparent text-warning-500 hover:bg-warning-50 focus-visible:bg-warning-50 active:bg-warning-100 focus-visible:ring-warning-200;
+        }
+
+        &.button-success {
+            @apply border-success-500 bg-transparent disabled:bg-transparent text-success-500 hover:bg-success-50 focus-visible:bg-success-50 active:bg-success-100 focus-visible:ring-success-200;
+        }
+
+        &.button-neutral {
+            @apply border-border bg-transparent disabled:bg-transparent hover:bg-background-tertiary focus-visible:bg-background-tertiary active:bg-accent-light/75 focus-visible:ring-foreground-primary/40;
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Button filled-outlined */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.button-filled-outlined {
+        @apply border;
+
+        &.button-default {
+            @apply border-primary-500 bg-primary-100 disabled:bg-primary-100 text-primary-800 hover:bg-primary-150 focus-visible:bg-primary-150 active:bg-primary-200 focus-visible:ring-primary-300;
+        }
+
+        &.button-primary {
+            @apply border-primary-500 bg-primary-100 disabled:bg-primary-100 text-primary-800 hover:bg-primary-150 focus-visible:bg-primary-150 active:bg-primary-200 focus-visible:ring-primary-300;
+        }
+
+        &.button-danger {
+            @apply border-danger-500 bg-danger-100 disabled:bg-danger-100 text-danger-800 hover:bg-danger-150 focus-visible:bg-danger-150 active:bg-danger-200 focus-visible:ring-danger-300;
+        }
+
+        &.button-warning {
+            @apply border-warning-500 bg-warning-100 disabled:bg-warning-100 text-warning-800 hover:bg-warning-150 focus-visible:bg-warning-150 active:bg-warning-200 focus-visible:ring-warning-300;
+        }
+
+        &.button-success {
+            @apply border-success-500 bg-success-100 disabled:bg-success-100 text-success-800 hover:bg-success-150 focus-visible:bg-success-150 active:bg-success-200 focus-visible:ring-success-300;
+        }
+
+        &.button-neutral {
+            @apply border-border bg-background-tertiary disabled:bg-background-tertiary hover:bg-accent-light/75 focus-visible:bg-accent-light/75 active:bg-accent-light focus-visible:ring-foreground-primary/40;
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Button soft */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.button-soft {
+        &.button-default {
+            @apply bg-primary-100 disabled:bg-primary-100 text-primary-500 active:text-primary-550 hover:bg-primary-150 focus-visible:bg-primary-150 active:bg-primary-200  focus-visible:ring-primary-300;
+        }
+
+        &.button-primary {
+            @apply bg-primary-100 disabled:bg-primary-100 text-primary-500 active:text-primary-550 hover:bg-primary-150 focus-visible:bg-primary-150 active:bg-primary-200 focus-visible:ring-primary-300;
+        }
+
+        &.button-danger {
+            @apply bg-danger-100 disabled:bg-danger-100 text-danger-500 active:text-danger-550 hover:bg-danger-150 focus-visible:bg-danger-150 active:bg-danger-200 focus-visible:ring-danger-300;
+        }
+
+        &.button-warning {
+            @apply bg-warning-100 disabled:bg-warning-100 text-warning-500 active:text-warning-550 hover:bg-warning-150 focus-visible:bg-warning-150 active:bg-warning-200 focus-visible:ring-warning-300;
+        }
+
+        &.button-success {
+            @apply bg-success-100 disabled:bg-success-100 text-success-500 active:text-success-550 hover:bg-success-150 focus-visible:bg-success-150 active:bg-success-200 focus-visible:ring-success-300;
+        }
+
+        &.button-neutral {
+            @apply bg-accent-light/75 disabled:bg-accent-light/75 hover:bg-accent-light focus-visible:bg-accent-light active:bg-accent-medium/70 focus-visible:ring-foreground-primary/40;
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Button link */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.button-link {
+        @apply h-auto rounded-none px-0 relative hover:underline disabled:no-underline underline-offset-4;
+
+        &.button-default {
+            @apply text-primary-500 disabled:text-primary-500 active:text-primary-600 focus-visible:ring-primary-200;
+        }
+
+        &.button-primary {
+            @apply text-primary-500 disabled:text-primary-500 active:text-primary-600 focus-visible:ring-primary-200;
+        }
+
+        &.button-danger {
+            @apply text-danger-500 disabled:text-danger-500 active:text-danger-600 focus-visible:ring-danger-200;
+        }
+
+        &.button-warning {
+            @apply text-warning-500 disabled:text-warning-500 active:text-warning-600 focus-visible:ring-warning-200;
+        }
+
+        &.button-success {
+            @apply text-success-500 disabled:text-success-500 active:text-success-600 focus-visible:ring-success-200;
+        }
+
+        &.button-neutral {
+            @apply text-foreground-primary disabled:text-foreground-primary active:text-foreground-primary/70 focus-visible:ring-foreground-primary/70;
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Button ghost */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.button-ghost {
+        &.button-default {
+            @apply text-foreground-primary bg-transparent disabled:bg-transparent hover:bg-background-tertiary focus-visible:bg-background-tertiary active:bg-accent-light/75 focus-visible:ring-foreground-primary/40;
+        }
+
+        &.button-primary {
+            @apply text-primary-500 bg-transparent disabled:bg-transparent hover:bg-primary-50 focus-visible:bg-primary-50 active:bg-primary-100 focus-visible:ring-primary-200;
+        }
+
+        &.button-danger {
+            @apply text-danger-500 bg-transparent disabled:bg-transparent hover:bg-danger-50 focus-visible:bg-danger-50 active:bg-danger-100 focus-visible:ring-danger-200;
+        }
+
+        &.button-warning {
+            @apply text-warning-500 bg-transparent disabled:bg-transparent hover:bg-warning-50 focus-visible:bg-warning-50 active:bg-warning-100 focus-visible:ring-warning-200;
+        }
+
+        &.button-success {
+            @apply text-success-500 bg-transparent disabled:bg-transparent hover:bg-success-50 focus-visible:bg-success-50 active:bg-success-100 focus-visible:ring-success-200;
+        }
+
+        &.button-neutral {
+            @apply text-foreground-primary bg-transparent disabled:bg-transparent hover:bg-background-tertiary focus-visible:bg-background-tertiary active:bg-accent-light/75 focus-visible:ring-foreground-primary/40;
+        }
+    }
+}

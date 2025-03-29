@@ -1,0 +1,25 @@
+import { Canvas, Meta } from "@storybook/blocks"
+
+import * as LabelStories from "./Label.stories"
+
+<Meta of={LabelStories} />
+
+# Label
+
+Renders an accessible label associated with controls.
+
+Radix UI Label documentation - [https://www.radix-ui.com/primitives/docs/components/label](https://www.radix-ui.com/primitives/docs/components/label)
+
+shadcn/ui Label documentation - [https://ui.shadcn.com/docs/components/label](https://ui.shadcn.com/docs/components/label)
+
+## Description
+
+**_Label_** is simple wrapper on top of **_HTML Label Element_**. Has the same logic and can be used with other input options.
+
+In many cases is used as base to create other Labels, such as **_InputLabel_**, **_DropdownTriggerLabel_**, etc.
+
+<Canvas of={LabelStories.Demo} />
+
+## Props
+
+**_Accepts all props of HTML Label Element._**

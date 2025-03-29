@@ -1,0 +1,148 @@
+/*-----------------------------------------------------------------------------------------------*/
+/* Button base colors */
+/*-----------------------------------------------------------------------------------------------*/
+.badge {
+    @apply flex items-center w-fit;
+
+    &:not(.badge-unstyled) {
+        @apply px-2 py-0.5 rounded-full;
+        @apply text-xs font-medium;
+        @apply transition-all duration-150;
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Badge filled */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.badge-filled {
+        &.badge-default {
+            @apply bg-primary-500 text-white;
+        }
+
+        &.badge-primary {
+            @apply bg-primary-500 text-white;
+        }
+
+        &.badge-danger {
+            @apply bg-danger-500 text-white;
+        }
+
+        &.badge-warning {
+            @apply bg-warning-400 text-white;
+        }
+
+        &.badge-success {
+            @apply bg-success-500 text-white;
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Badge outlined */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.badge-outlined {
+        @apply border;
+
+        &.badge-default {
+            @apply border-border bg-background-secondary text-foreground-primary;
+        }
+
+        &.badge-primary {
+            @apply border-primary-500 bg-background-secondary text-primary-500;
+        }
+
+        &.badge-danger {
+            @apply border-danger-500 bg-background-secondary text-danger-500;
+        }
+
+        &.badge-warning {
+            @apply border-warning-500 bg-background-secondary text-warning-500;
+        }
+
+        &.badge-success {
+            @apply border-success-500 bg-background-secondary text-success-500;
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Badge filled-outlined */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.badge-filled-outlined {
+        @apply border;
+
+        &.badge-default {
+            @apply border-border text-foreground-primary bg-background-tertiary;
+        }
+
+        &.badge-primary {
+            @apply border-primary-500 bg-primary-100 text-primary-800;
+        }
+
+        &.badge-danger {
+            @apply border-danger-500 bg-danger-100 text-danger-800;
+        }
+
+        &.badge-warning {
+            @apply border-warning-500 bg-warning-100 text-warning-800;
+        }
+
+        &.badge-success {
+            @apply border-success-500 bg-success-100 text-success-800;
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Badge soft */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.badge-soft {
+        &.badge-default {
+            @apply bg-accent-light;
+        }
+
+        &.badge-primary {
+            @apply bg-primary-100 text-primary-500;
+        }
+
+        &.badge-danger {
+            @apply bg-danger-100 text-danger-500;
+        }
+
+        &.badge-warning {
+            @apply bg-warning-100 text-warning-550;
+        }
+
+        &.badge-success {
+            @apply bg-success-100 text-success-500;
+        }
+    }
+
+    /*-----------------------------------------------------------------------------------------------*/
+    /* Badge text */
+    /*-----------------------------------------------------------------------------------------------*/
+
+    &.badge-text {
+        @apply rounded-none text-nowrap;
+
+        &.badge-default {
+            @apply text-foreground-secondary;
+        }
+
+        &.badge-primary {
+            @apply text-primary-500;
+        }
+
+        &.badge-danger {
+            @apply text-danger-500;
+        }
+
+        &.badge-warning {
+            @apply text-warning-500;
+        }
+
+        &.badge-success {
+            @apply text-success-500;
+        }
+    }
+}

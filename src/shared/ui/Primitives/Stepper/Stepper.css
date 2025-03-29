@@ -1,0 +1,36 @@
+.stepper {
+  @apply flex gap-3;
+}
+
+.stepper-item {
+  @apply flex flex-col gap-1 items-center justify-center flex-grow basis-0 font-semibold text-xs text-foreground-tertiary transition-all duration-300;
+}
+
+.stepper-item[data-active="true"] {
+  @apply text-primary-500;
+}
+
+.stepper-bar {
+  @apply h-[3px] w-full bg-border rounded-full overflow-hidden;
+  position: relative;
+}
+
+.stepper-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: theme('colors.primary.500');
+  transform-origin: left;
+  transition: transform 1s cubic-bezier(.28, .71, .32, .97);
+}
+
+.stepper-bar[data-active="true"]::after {
+  transform: scaleX(1);
+}
+
+.stepper-bar[data-active="false"]::after {
+  transform: scaleX(0);
+}
