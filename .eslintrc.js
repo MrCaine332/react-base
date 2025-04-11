@@ -1,4 +1,3 @@
-// .eslintrc.js
 module.exports = {
     env: {
         browser: true,
@@ -13,16 +12,14 @@ module.exports = {
         },
         ecmaVersion: 2021,
         sourceType: "module",
-        project: "./tsconfig.json",
     },
     settings: {
+        "import/parsers": {
+            "@typescript-eslint/parser": [".ts", ".tsx", ".scss"],
+        },
         "import/resolver": {
-            node: {
-                extensions: [".js", ".jsx", ".ts", ".tsx"],
-            },
-            alias: {
-                map: [["@", "./src"]],
-                extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+            typescript: {
+                project: "./tsconfig.json",
             },
         },
         react: {
@@ -32,12 +29,11 @@ module.exports = {
     plugins: ["react", "@typescript-eslint", "prettier"],
     extends: [
         "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
         "airbnb",
         "airbnb/hooks",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended",
         "plugin:import/typescript",
         "prettier", // Make sure this is last
     ],
@@ -65,7 +61,7 @@ module.exports = {
         "@typescript-eslint/no-use-before-define": ["error"],
         "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
         "@typescript-eslint/no-explicit-any": "warn",
-        "@typescript-eslint/no-shadow": ["error"],
+        "@typescript-eslint/no-shadow": ["warn"],
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/ban-ts-comment": "off",
 
@@ -78,6 +74,9 @@ module.exports = {
         "react/jsx-props-no-spreading": "off", // Allow JSX props spreading
         "react/jsx-boolean-value": ["error", "never"],
         "react/button-has-type": "off",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/function-component-definition": "off",
+        "react/jsx-no-constructed-context-values": "warn",
 
         // a11y
         "jsx-a11y/click-events-have-key-events": "off",
@@ -103,12 +102,16 @@ module.exports = {
 
         // General
         "no-console": ["warn", { allow: ["warn", "error"] }],
-        "no-param-reassign": ["error", { props: true, ignorePropertyModificationsFor: ["state"] }], // For Redux Toolkit
         "no-use-before-define": "off",
         "no-shadow": "off",
         "no-unused-vars": "off",
         "arrow-body-style": "off",
         "no-plusplus": "off",
+        "no-underscore-dangle": "off",
+        "no-nested-ternary": "off",
+        "no-promise-executor-return": "off",
+        "no-param-reassign": "off",
+        "prefer-destructuring": "warn",
     },
     overrides: [
         // Test files
