@@ -1,3 +1,5 @@
+import * as React from "react"
+
 // ESM is still a nightmare with Next.js so I'm just gonna copy the package code in
 // https://github.com/gregberge/react-merge-refs
 // Copyright (c) 2020 Greg Bergé

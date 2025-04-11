@@ -1,5 +1,5 @@
 .selectable {
-  @apply w-full flex-col overflow-auto rounded-md outline-primary-500 outline-1;
+  @apply w-full flex-col overflow-auto rounded-md outline-none;
 }
 
 .selectable-input {

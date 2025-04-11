@@ -28,24 +28,25 @@ PopoverTrigger.displayName = PopoverPrimitive.Trigger.displayName
 /* PopoverContent */
 /*-----------------------------------------------------------------------------------------------*/
 
-export type PopoverContentExtraProps = {
-    onOpenAutoFocus?: PopoverContentProps["onOpenAutoFocus"]
-    onCloseAutoFocus?: PopoverContentProps["onCloseAutoFocus"]
-    onEscapeKeyDown?: PopoverContentProps["onEscapeKeyDown"]
-    onPointerDownOutside?: PopoverContentProps["onPointerDownOutside"]
-    onFocusOutside?: PopoverContentProps["onFocusOutside"]
-    onInteractOutside?: PopoverContentProps["onInteractOutside"]
-    side?: PopoverContentProps["side"]
-    sideOffset?: PopoverContentProps["sideOffset"]
-    align?: PopoverContentProps["align"]
-    alignOffset?: PopoverContentProps["alignOffset"]
-    avoidCollisions?: PopoverContentProps["avoidCollisions"]
-    collisionBoundary?: PopoverContentProps["collisionBoundary"]
-    collisionPadding?: PopoverContentProps["collisionPadding"]
-    arrowPadding?: PopoverContentProps["arrowPadding"]
-    sticky?: PopoverContentProps["sticky"]
-    hideWhenDetached?: PopoverContentProps["hideWhenDetached"]
-}
+type PopoverContentExtraPropsKeys =
+    | "onOpenAutoFocus"
+    | "onCloseAutoFocus"
+    | "onEscapeKeyDown"
+    | "onPointerDownOutside"
+    | "onFocusOutside"
+    | "onInteractOutside"
+    | "side"
+    | "sideOffset"
+    | "align"
+    | "alignOffset"
+    | "avoidCollisions"
+    | "collisionBoundary"
+    | "collisionPadding"
+    | "arrowPadding"
+    | "sticky"
+    | "hideWhenDetached"
+
+export type PopoverContentExtraProps = Pick<PopoverContentProps, PopoverContentExtraPropsKeys>
 
 const PopoverContent = React.forwardRef<
     React.ElementRef<typeof PopoverPrimitive.Content>,
@@ -75,6 +76,7 @@ const PopoverArrow = React.forwardRef<
     React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Arrow>
 >(({ className, ...props }, ref) => (
     <PopoverPrimitive.Arrow
+        ref={ref}
         className={cn(
             "h-4 w-4 rotate-45 -translate-y-[calc(50%+1px)] bg-white border border-border border-t-transparent border-l-transparent rounded-br",
             className

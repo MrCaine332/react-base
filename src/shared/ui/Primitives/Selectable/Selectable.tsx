@@ -14,7 +14,7 @@ import { useFieldProps } from "@/shared/ui/Core/Field/hooks"
 const Selectable = React.forwardRef<
     React.ElementRef<typeof SelectablePrimitive>,
     React.ComponentPropsWithoutRef<typeof SelectablePrimitive>
->(({ className, shouldFilter = false, loop = false, ...props }, ref) => {
+>(({ className, shouldFilter = false, loop = true, ...props }, ref) => {
     return (
         <SelectablePrimitive
             ref={ref}

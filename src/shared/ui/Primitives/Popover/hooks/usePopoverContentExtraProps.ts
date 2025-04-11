@@ -1,5 +1,4 @@
-import { PopoverContent, PopoverContentExtraProps } from "@/shared/ui/Primitives/Popover"
-import React from "react"
+import { PopoverContentExtraProps } from "@/shared/ui/Primitives/Popover"
 import { useExtractedProps } from "@/shared/hooks/useExtractedProps"
 
 const keys: (keyof PopoverContentExtraProps)[] = [

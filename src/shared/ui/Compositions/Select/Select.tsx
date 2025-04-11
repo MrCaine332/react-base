@@ -121,6 +121,7 @@ const Select = <Option extends SelectOption = SelectOption>({
             </PopoverTrigger>
             <PopoverContent className="p-0 min-w-[var(--radix-popover-trigger-width)]" asChild {...popoverContentProps}>
                 <SelectContent
+                    disabled={disabled}
                     defaultValue={value?.label}
                     className={contentClassName}
                     {...contentProps}

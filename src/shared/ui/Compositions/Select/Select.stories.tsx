@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import type { Meta, StoryObj } from "@storybook/react"
 
-import { SelectContent } from "@/shared/ui/Compositions/Select/SelectContent"
 import { SelectOption } from "@/shared/ui/Compositions/Select/types"
 import "../Input/Input.css"
 import { SelectableItem } from "@/shared/ui/Primitives/Selectable"
@@ -51,7 +50,7 @@ export const Demo = {
 
         React.useEffect(() => {
             const interval = setInterval(() => {
-                console.log(ref)
+                // console.log(ref)
             }, 1000)
 
             return () => {
@@ -59,11 +58,30 @@ export const Demo = {
             }
         }, [])
 
-        const [search, setSearch] = useState("12")
+        const [value, setValue] = useState<string | null>(null)
+
+        const onValueChange = (o: SelectOption | null) => {
+            console.log(o)
+            setValue(o?.value ?? null)
+        }
+
+        useEffect(() => {
+            setValue("value1")
+        }, [])
 
         return (
             <div className="flex items-center space-x-2 pb-20">
-                <Select options={options} className="w-[200px]" placeholder="Bibaboba" />
+                <Select
+                    value={value}
+                    onValueChange={onValueChange}
+                    options={options}
+                    className="w-[200px]"
+                    footer={
+                        <div>
+                            <SelectableItem>Footer Item</SelectableItem>
+                        </div>
+                    }
+                />
             </div>
         )
     },
