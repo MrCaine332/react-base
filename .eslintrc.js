@@ -65,6 +65,7 @@ module.exports = {
         "@typescript-eslint/no-shadow": ["warn"],
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-unsafe-function-type": "off",
 
         // React
         "react/display-name": "off",
@@ -100,6 +101,7 @@ module.exports = {
         "import/no-self-import": "error",
         "import/no-named-as-default": "error",
         "import-helpers/order-imports": "off",
+        "import/no-cycle": "warn",
 
         // General
         "no-console": ["warn", { allow: ["warn", "error"] }],
@@ -113,6 +115,10 @@ module.exports = {
         "no-promise-executor-return": "off",
         "no-param-reassign": "off",
         "prefer-destructuring": "warn",
+        "lines-between-class-members": "off",
+        "class-methods-use-this": "off",
+        "no-void": "off",
+        "no-redeclare": "warn",
     },
     overrides: [
         // Test files
