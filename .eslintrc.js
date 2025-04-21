@@ -66,6 +66,7 @@ module.exports = {
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/no-unsafe-function-type": "off",
+        "@typescript-eslint/no-empty-object-type": "off",
 
         // React
         "react/display-name": "off",
@@ -79,6 +80,7 @@ module.exports = {
         "react-hooks/exhaustive-deps": "warn",
         "react/function-component-definition": "off",
         "react/jsx-no-constructed-context-values": "warn",
+        "react/jsx-pascal-case": "warn",
 
         // a11y
         "jsx-a11y/click-events-have-key-events": "off",

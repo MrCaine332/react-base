@@ -128,7 +128,7 @@ export type SelectContentBaseProps = React.ComponentPropsWithoutRef<typeof Selec
 
 export type SelectContentOptionsProps<Option extends SelectOption = SelectOption> = {
     getOptionSelected?: (option: Option) => boolean
-    onOptionSelected?: (option: Option, selected: boolean, index: number, group: SelectOptionGroup) => void
+    onOptionSelected?: (option: Option, selected: boolean, group: SelectOptionGroup, index: number) => void
 }
 
 export type SelectContentProps<Option extends SelectOption = SelectOption> = SelectContentBaseProps &
@@ -153,6 +153,7 @@ function _SelectContent<Option extends SelectOption = SelectOption>(
         sortGroups = sortStrings,
         groupClassName,
         groupPropsBuilder,
+        defaultGroupKey,
 
         forceHeadingsMount,
         headingClassName,
@@ -270,7 +271,8 @@ function _SelectContent<Option extends SelectOption = SelectOption>(
     /* Options and Groups */
     /* ============================================== */
     const getOptions = () => {
-        const grouped = groupBy(options, (o) => o.group || SELECT_OPTIONS_GROUP)
+        const dgk = defaultGroupKey ?? SELECT_OPTIONS_GROUP
+        const grouped = groupBy(options, (o) => o.group ?? dgk)
         const groups = Object.keys(grouped)
         const sorted = sortGroups(groups)
 
@@ -294,7 +296,7 @@ function _SelectContent<Option extends SelectOption = SelectOption>(
                                 >
                                     {renderHeadingContent
                                         ? renderHeadingContent(group, options)
-                                        : group === SELECT_OPTIONS_GROUP
+                                        : group === dgk
                                           ? "Options"
                                           : group}
                                 </SelectableHeading>
@@ -302,7 +304,7 @@ function _SelectContent<Option extends SelectOption = SelectOption>(
 
                             {options.map((option, index) => {
                                 const selected = getOptionSelected?.(option) ?? false
-                                const optionProps = optionPropsBuilder?.(option, selected, index, group)
+                                const optionProps = optionPropsBuilder?.(option, selected, group, index)
 
                                 const optionDisabled = option.disabled ?? optionProps?.disabled ?? disabled
 
@@ -314,13 +316,13 @@ function _SelectContent<Option extends SelectOption = SelectOption>(
                                         disabled={optionDisabled}
                                         className={cn(optionClassName, optionProps?.className)}
                                         onSelect={() => {
-                                            onOptionSelected?.(option, !selected, index, group)
+                                            onOptionSelected?.(option, !selected, group, index)
                                             optionProps?.onSelect?.(option.value)
                                         }}
                                     >
                                         <>
                                             {renderOptionContent ? (
-                                                renderOptionContent(option, selected, index, group)
+                                                renderOptionContent(option, selected, group, index)
                                             ) : (
                                                 <span className="overflow-hidden text-ellipsis whitespace-pre-wrap pr-0.5">
                                                     {option.label}
@@ -328,7 +330,7 @@ function _SelectContent<Option extends SelectOption = SelectOption>(
                                             )}
                                             {forceOptionIndicatorsMount || selected ? (
                                                 renderOptionIndicator ? (
-                                                    renderOptionIndicator(option, selected, index, group)
+                                                    renderOptionIndicator(option, selected, group, index)
                                                 ) : (
                                                     <FaCheck size={12} className="shrink-0 ml-auto text-primary-500" />
                                                 )
@@ -358,6 +360,7 @@ function _SelectContent<Option extends SelectOption = SelectOption>(
         </>
     ) : null
 
+    /* Final composition */
     /* ============================================== */
     return (
         <Selectable ref={ref} disabled={disabled} {...props}>

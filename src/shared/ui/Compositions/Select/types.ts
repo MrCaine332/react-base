@@ -26,22 +26,22 @@ export type SelectOptionsProps<Option extends SelectOption = SelectOption> = {
     optionPropsBuilder?: (
         option: Option,
         selected: boolean,
-        index: number,
-        group: SelectOptionGroup
+        group: SelectOptionGroup,
+        index: number
     ) => React.ComponentProps<typeof SelectableItem> | undefined | void
     renderOptionContent?: (
         option: Option,
         selected: boolean,
-        index: number,
-        group: SelectOptionGroup
+        group: SelectOptionGroup,
+        index: number
     ) => React.ReactNode
 
     forceOptionIndicatorsMount?: boolean
     renderOptionIndicator?: (
         option: Option,
         selected: boolean,
-        index: number,
-        group: SelectOptionGroup
+        group: SelectOptionGroup,
+        index: number
     ) => React.ReactNode
 
     sortGroups?: (groups: SelectOptionGroup[]) => string[]
@@ -50,6 +50,7 @@ export type SelectOptionsProps<Option extends SelectOption = SelectOption> = {
         group: SelectOptionGroup,
         options: Option[]
     ) => React.ComponentProps<typeof SelectableGroup> | undefined | void
+    defaultGroupKey?: string
 
     forceHeadingsMount?: boolean
     headingClassName?: string

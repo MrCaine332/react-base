@@ -2,15 +2,9 @@ import * as React from "react"
 
 import { PopoverContent, PopoverRoot, PopoverTrigger } from "@/shared/ui/Primitives/Popover"
 import { Trigger } from "@/shared/ui/Compositions/Trigger"
-import { Selectable } from "@/shared/ui/Primitives/Selectable"
-import { SelectOption, SelectOptionsProps, SelectValue } from "@/shared/ui/Compositions/Select/types"
-import {
-    SelectContent,
-    SelectContentExtraProps,
-    useSelectContentProps,
-} from "@/shared/ui/Compositions/Select/SelectContent"
+import { MultiSelectValue, SelectOption, SelectOptionsProps } from "@/shared/ui/Compositions/Select/types"
+import { SelectContent, useSelectContentProps } from "@/shared/ui/Compositions/Select/SelectContent"
 
-import { normalizeSingleSelectValue } from "@/shared/ui/Compositions/Select/utils/normalizeSingleSelectValue"
 import { __DEV__ } from "@/shared/constants"
 
 import { useValueDefinitionTrack } from "@/shared/hooks/useValueDefinitionTrack"
@@ -18,37 +12,30 @@ import { usePopoverContentExtraProps } from "@/shared/ui/Primitives/Popover/hook
 import { useSelectOptionsProps } from "@/shared/ui/Compositions/Select/hooks/useSelectOptionsProps"
 import { cn } from "@/shared/utils/cn"
 import { AddonOpenChevron } from "@/shared/ui/Core/AddonBox/addons"
+import { SelectBaseProps, SelectExtraProps, SelectRootProps } from "@/shared/ui/Compositions/Select"
+import { normalizeMultiSelectValue } from "@/shared/ui/Compositions/Select/utils/normalizeMultiSelectValue"
 
 /*-----------------------------------------------------------------------------------------------*/
 /* Select */
 /*-----------------------------------------------------------------------------------------------*/
 
-export type SelectRootProps = React.ComponentProps<typeof PopoverRoot> &
-    Omit<React.ComponentProps<typeof PopoverContent>, "forceMount" | "asChild">
+export type MultiSelectValueOptionsProps<Option extends SelectOption> = SelectOptionsProps<Option> & {
+    value?: MultiSelectValue<Option>
+    defaultValue?: MultiSelectValue<Option>
+    maxSelected?: number
+    onValueChange?: (value: Option[], option: Option, selected: boolean) => void
 
-export type SelectBaseProps = Omit<React.ComponentProps<typeof Trigger>, "value" | "defaultValue">
-
-export type SelectExtraProps = SelectContentExtraProps & {
-    contentClassName?: string
-    contentProps?: React.ComponentProps<typeof Selectable>
-}
-
-export type SelectValueOptionsProps<Option extends SelectOption> = SelectOptionsProps<Option> & {
-    value?: SelectValue<Option>
-    defaultValue?: SelectValue<Option>
-    onValueChange?: (value: Option | null) => void
-
-    renderTrigger?: (value: Option | null) => React.ReactNode
-    renderValue?: (value: Option | null) => React.ReactNode
+    renderTrigger?: (value: Option[]) => React.ReactNode
+    renderValue?: (value: Option[]) => React.ReactNode
     placeholder?: React.ReactNode
 }
 
-export type SelectProps<Option extends SelectOption> = SelectRootProps &
+export type MultiSelectProps<Option extends SelectOption> = SelectRootProps &
     SelectBaseProps &
     SelectExtraProps &
-    SelectValueOptionsProps<Option>
+    MultiSelectValueOptionsProps<Option>
 
-const Select = <Option extends SelectOption = SelectOption>({
+const MultiSelect = <Option extends SelectOption = SelectOption>({
     disabled,
 
     open: _open,
@@ -58,6 +45,7 @@ const Select = <Option extends SelectOption = SelectOption>({
 
     value: _value,
     defaultValue,
+    maxSelected,
     onValueChange: _onValueChange,
     placeholder,
 
@@ -70,7 +58,7 @@ const Select = <Option extends SelectOption = SelectOption>({
     children,
     addonAfter,
     ...props
-}: SelectProps<Option>) => {
+}: MultiSelectProps<Option>) => {
     const { extracted: popoverContentProps, remaining: _ } = usePopoverContentExtraProps(props)
     const { extracted: selectOptionsProps, remaining: __ } = useSelectOptionsProps<Option>(_)
     const { extracted: selectContentProps, remaining: rest } = useSelectContentProps(__)
@@ -89,19 +77,31 @@ const Select = <Option extends SelectOption = SelectOption>({
     }
 
     const [innerValue, setInnerValue] = React.useState(() =>
-        defaultValue ? normalizeSingleSelectValue(options ?? [], defaultValue) : null
+        defaultValue ? normalizeMultiSelectValue(options ?? [], defaultValue) : []
     )
-    const value = _value !== undefined ? normalizeSingleSelectValue(options ?? [], _value) : innerValue
-    const onValueChange = (value: Option | null) => {
+    const value = _value !== undefined ? normalizeMultiSelectValue(options ?? [], _value) : innerValue
+    const onValueChange = (value: Option[], option: Option, selected: boolean) => {
         if (_value === undefined) setInnerValue(value)
-        _onValueChange?.(value)
+        _onValueChange?.(value, option, selected)
     }
 
     const onOptionSelected = (option: Option, selected: boolean) => {
-        onValueChange(selected ? option : null)
+        if (maxSelected && value.length >= maxSelected && selected) {
+            return
+        }
+
+        const updatedValue = selected ? [...value, option] : value.filter((o) => o.value !== option.value)
+
+        onValueChange(updatedValue, option, selected)
     }
 
-    const getOptionSelected = (option: Option) => option.value === value?.value
+    const getOptionSelected = (option: Option) => value.some((o) => o.value === option.value)
+
+    const getOptionToScrollTo = () => {
+        if (!open) return undefined
+        if (value.length === 0) return undefined
+        return value[value.length - 1]?.label ?? undefined
+    }
 
     return (
         <PopoverRoot open={open} onOpenChange={onOpenChange} modal={modal}>
@@ -112,18 +112,18 @@ const Select = <Option extends SelectOption = SelectOption>({
                     <Trigger
                         {...rest}
                         disabled={disabled}
-                        className={cn(!value && "text-foreground-tertiary", props.className)}
+                        className={cn(value.length === 0 && "text-foreground-tertiary", props.className)}
                         active={props.active === undefined ? open : props.active}
                         addonAfter={addonAfter !== undefined ? addonAfter : <AddonOpenChevron open={open} />}
                     >
-                        {value ? (renderValue ? renderValue(value) : value.label) : placeholder}
+                        {value.length ? (renderValue ? renderValue(value) : `${value.length} selected`) : placeholder}
                     </Trigger>
                 )}
             </PopoverTrigger>
             <PopoverContent className="p-0 min-w-[var(--radix-popover-trigger-width)]" asChild {...popoverContentProps}>
                 <SelectContent
                     disabled={disabled}
-                    defaultValue={value?.label}
+                    defaultValue={getOptionToScrollTo()}
                     className={contentClassName}
                     {...contentProps}
                     {...selectContentProps}
@@ -138,4 +138,4 @@ const Select = <Option extends SelectOption = SelectOption>({
     )
 }
 
-export { Select }
+export { MultiSelect }
