@@ -121,6 +121,8 @@ module.exports = {
         "class-methods-use-this": "off",
         "no-void": "off",
         "no-redeclare": "warn",
+        "no-restricted-syntax": "off",
+        "no-continue": "off",
     },
     overrides: [
         // Test files
